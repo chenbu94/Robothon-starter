@@ -5,8 +5,9 @@
 keyboard teleoperation, and an imitation-learning data-collection pipeline.
 
 > **No external assets, no GPU.** The hand and scene are generated procedurally
-> as a single MJCF — `pip install mujoco` and run. Demo video can be produced on
-> a headless machine (matplotlib renderer) *or* with MuJoCo's native renderer.
+> as a single MJCF — `pip install mujoco` and run. The 1–3 min demo video is
+> produced by running the code: a no-GL **shaded-solid renderer** for headless
+> machines, *or* MuJoCo's **native renderer** where a GL backend exists.
 
 ---
 
@@ -89,7 +90,7 @@ src/build_model.py        procedural MJCF generator (parameterised)
 src/controllers.py        Grasp / FingertipIK / Choreography / Teleop
 src/run_sim.py            task orchestrator + dataset writer
 src/data_collection.py    EpisodeLogger (npz/csv/json)
-src/make_video.py         headless matplotlib demo renderer (no GPU)
+src/make_video.py         headless shaded-solid demo renderer (no GPU)
 src/record_demo.py        native MuJoCo HQ renderer (needs GL)
 src/teleop.py             keyboard teleoperation (needs display)
 src/analyze.py            metrics figures

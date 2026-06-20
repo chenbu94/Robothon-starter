@@ -16,7 +16,7 @@ Provide a reproducible, GPU-free MuJoCo testbed for **fine multi-finger manipula
   * *TeleopController* — discrete keyboard commands → smoothed actuator goals.
 * **Position actuators** (PD) are tuned (`kp≈18–22`) for crisp tracking *and* a firm grasp.
 * **Data pipeline.** `EpisodeLogger` records full observation–action pairs to `npz/csv/json` per task — ready for behaviour cloning or offline RL.
-* **Rendering.** Two paths: a dependency-light **matplotlib** renderer that works on headless/no-GPU machines (`make_video.py`), and MuJoCo's **native renderer** for photo-realistic output where a GL backend exists (`record_demo.py`). Both replay the same recorded trajectory, so the video is provably produced by running the submitted code.
+* **Rendering.** Two paths, both replaying the *same* recorded trajectory so the video is provably produced by running the submitted code. (1) A dependency-light **headless renderer** (`make_video.py`) that rebuilds the scene as depth-sorted, light-shaded 3-D solids (low-poly cylinders for the phalanges, shaded boxes for palm/cube) with a metric HUD, phase cards, fingertip markers and an orbiting camera — runs on any no-GPU / no-display machine. (2) MuJoCo's **native renderer** (`record_demo.py`) for photo-realistic output with contact-force visualisation where a GL backend exists.
 
 ## Core features
 * 20-DOF hand authored 100% in MJCF — zero external assets, one-line install.
@@ -41,7 +41,7 @@ Provide a reproducible, GPU-free MuJoCo testbed for **fine multi-finger manipula
 
 ## Current limitations
 * **In-hand reorientation** (continuous object rotation by finger gaiting) was prototyped but open-loop gaiting achieves <3° net rotation — it realistically needs a learned policy (RL). It is intentionally excluded from the scored tasks.
-* The matplotlib fallback video is schematic; the native MuJoCo render (`record_demo.py`) is the high-fidelity version.
+* The headless renderer draws shaded 3-D solids (not a physically-based render); for photo-realistic frames with contact forces, run the native MuJoCo renderer (`record_demo.py`) on a machine with a GL backend.
 * Grasp robustness was tuned for a light cube (~50 g); heavier/odd-shaped objects would need re-tuning.
 
 ## Future work
