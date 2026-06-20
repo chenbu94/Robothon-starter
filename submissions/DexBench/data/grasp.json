@@ -1,0 +1,13 @@
+{
+  "task": "grasp",
+  "steps": 3500,
+  "duration_s": 6.998,
+  "dof": 26,
+  "actuators": 20,
+  "metrics": {
+    "held": true,
+    "min_height_m": 0.1377471008085494,
+    "perturb_N": 0.3,
+    "contacts": 11
+  }
+}

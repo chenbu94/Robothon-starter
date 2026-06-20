@@ -1,0 +1,10 @@
+{
+  "task": "choreography",
+  "steps": 2250,
+  "duration_s": 4.498,
+  "dof": 26,
+  "actuators": 20,
+  "metrics": {
+    "max_flex_rad": 1.200117915635265
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "task": "reach",
+  "steps": 3000,
+  "duration_s": 5.998,
+  "dof": 26,
+  "actuators": 20,
+  "metrics": {
+    "mean_err_mm": 12.839367803936462,
+    "max_err_mm": 16.66132963658868
+  }
+}
