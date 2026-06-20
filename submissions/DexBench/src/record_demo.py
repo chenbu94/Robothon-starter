@@ -165,19 +165,24 @@ def main():
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     writer = imageio.get_writer(args.out, fps=args.fps, codec="libx264",
                                 quality=9, macro_block_size=8)
-    sel = range(0, len(T), args.stride)
+    sel = list(range(0, len(T), args.stride))
+    total = len(sel)
+    print(f"rendering {total} frames at {args.width}x{args.height} "
+          f"(MUJOCO_GL={os.environ.get('MUJOCO_GL', 'default')}) ...")
     n = 0
     for k, fi in enumerate(sel):
         d.qpos[:] = Q[fi]
         mujoco.mj_forward(m, d)
         # gentle orbit so the 3-D structure reads clearly
-        cam.azimuth = -70 + 14 * np.sin(2 * np.pi * k / max(1, len(T) // args.stride))
+        cam.azimuth = -70 + 14 * np.sin(2 * np.pi * k / max(1, total))
         renderer.update_scene(d, camera=cam, scene_option=opt)
         frame = renderer.render()
         if not args.no_hud:
             frame = draw_hud(frame, float(T[fi]), t_end)
         writer.append_data(frame)
         n += 1
+        if n % 50 == 0 or n == total:
+            print(f"  frame {n}/{total}  ({100 * n / total:4.0f}%)", flush=True)
     writer.close()
     print(f"wrote {args.out}  ({n} frames @ {args.fps} fps = {n / args.fps:.1f}s)")
 
